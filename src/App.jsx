@@ -1,22 +1,21 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
-
+import ChiSiamoPage from "./pages/ChiSiamoPage";
+import ProdottiPage from "./pages/ProdottiPage";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 function App() {
-  const [elem, setElem] = useState([]);
 
-  function handleFetch(){
-    console.log("ho cliccato il fetch");
-    fetch('https://fakestoreapi.com/products')
-      .then(response => response.json())
-      .then(data => console.log(data))
-  }
 
   return (
     <BrowserRouter>
     <Routes>
-      <Route path={"/"} element={<HomePage/>} />
+      <Route element={<DefaultLayout />}>
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/ChiSiamo" element={<ChiSiamoPage/>} />
+        <Route path="/Prodotti" element={<ProdottiPage/>} />
+    </Route>
     </Routes>
     </BrowserRouter>
   )
