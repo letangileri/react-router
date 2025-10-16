@@ -9,7 +9,7 @@ export default function ProdottiPage(){
     const [elem, setElem] = useState([]);
 
     function fetchData(){
-        console.log("ho cliccato il fetch");
+        console.log("sono nel fetch");
     
         axios.get('https://fakestoreapi.com/products')
         .then((res)=>{
