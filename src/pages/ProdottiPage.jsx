@@ -4,6 +4,7 @@ import AppCard from "../components/AppJumbotron"
 import AppJumbotron from "../components/AppJumbotron"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 export default function ProdottiPage(){
     const [elem, setElem] = useState([]);
@@ -34,15 +35,21 @@ export default function ProdottiPage(){
                 <div className="row row-cols1 row-cols-md2 row-cols-lg3 g-3">
                     {elem.map((item)=>(
                     <div key = {item.id} className="col">
-                    <div className="card" >
+                    <div className="card h-100" >
                         <div className="card-img-top">
+                        <Link to={`/Prodotti/${item.id}`}>
                             <img src={item.image} alt="" /> 
+                        </Link>
                         </div>
                         <div className="card-body">
                             <h3>{item.title}</h3>
-                            <p>{item.price}</p>
+                            <div className="d-flex justify-content-between align-items-center">
+                        <span>
+                        <strong> {item.price} €</strong>
+                        </span>
                         </div>
                     </div>
+                </div>
                 </div>
                     ))}
             </div>
