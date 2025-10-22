@@ -1,11 +1,15 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import AppJumbotron from "../components/AppJumbotron";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AppCard from "../components/AppCard";
+import { ChaoticOrbit } from 'ldrs/react'
+
+
 
 export default function SingleProductPage(){
     const {id} = useParams();
+    const navigate = useNavigate();
     const [singleProduct, setSingleProduct] = useState(null);
 
     console.log(setSingleProduct);
@@ -30,6 +34,7 @@ export default function SingleProductPage(){
             
         }).catch(err => {
             console.log(err);
+            navigate('/Prodotti')
             
         })
     
@@ -38,18 +43,33 @@ export default function SingleProductPage(){
 
     console.log(singleProduct);
     useEffect(()=>{
-        fetchData(endpoint)
+        setTimeout(() => {
+            fetchData(endpoint)
+        }, 3000);
+        
     },[])
 
     return(
         <>
-                <AppJumbotron title = "Singolo prodotto" description = "Sei nella sezione singolo prodotto" cta= "Guarda altri prodotti" />
-                
-                {singleProduct != null ?
-                <AppCard prodotto={singleProduct}/>:
-                <p>non ci sono prodotti</p>
-                }
+        <AppJumbotron title = "Singolo prodotto" description = "Sei nella sezione singolo prodotto" cta= "Guarda altri prodotti" />
+        <section>
+        <div className="container">
+        <div className="row row-cols1 row-cols-md2 row-cols-lg3 g-3">
+        {singleProduct != null ?
 
+        <AppCard prodotto={singleProduct}/>:
+
+
+        // Default values shown
+        <ChaoticOrbit
+        size="35"
+        speed="1.5"
+        color="black" 
+        />
+        }
+        </div>
+        </div>
+        </section>
         </>
     )
 }
